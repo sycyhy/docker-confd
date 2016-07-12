@@ -1,0 +1,4 @@
+confdir = "/etc/confd"
+log-level = "debug"
+backend = "etcd"
+nodes=[]  # dinamically assigned by bash script using env variables

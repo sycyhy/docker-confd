@@ -1,0 +1,6 @@
+[template]
+src = "application.conf.tmpl"
+dest = "/home/app/conf/application.conf"
+keys = [
+	"/address",
+]
