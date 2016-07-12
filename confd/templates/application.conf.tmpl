@@ -1,0 +1,15 @@
+mode = {{getenv "MODE"}}
+
+etcd {
+  cluster {
+    nodes = ["http://127.0.0.1:4001"]
+  }
+}
+
+service {
+    name = {{getenv "SERVICE_NAME"}}
+}
+
+database {
+    address = {{getv "/address"}}
+  }
