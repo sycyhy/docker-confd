@@ -1,0 +1,19 @@
+version: '2'
+services:
+  elasticsearch:
+    image: elasticsearch:latest
+    network_mode: "host"
+    volumes:
+     - ./volumes/elasticsearch/data:/data
+  kibana:
+    image: kibana:latest
+    network_mode: "host"
+    volumes:
+     - ./volumes/kibana/data:/data
+  logstash:
+    image: logstash:latest
+    network_mode: "host"
+    volumes:
+     - ./conf:/home/logstash/conf
+     - ./volumes/logstash/data:/data
+

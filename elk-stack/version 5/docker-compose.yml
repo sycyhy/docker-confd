@@ -1,0 +1,28 @@
+version: '2'
+services:
+  elasticsearch:
+    image: elasticsearch:5.1.1
+    restart: always
+    ports:
+      - "9200:9200"
+      - "9300:9300"
+    volumes:
+     - ./volumes/elasticsearch/data:/usr/share/elasticsearch/data
+  kibana:
+    image: kibana:5.1.1
+    restart: always
+    links:
+      - elasticsearch:elasticsearch
+    ports:
+      - "5601:5601"    
+  logstash:
+    image: voicepin-logstash:5.1.1
+    restart: always
+    command: "logstash -f /config-dir/logstash.conf"
+    links:
+      - elasticsearch:elasticsearch
+    ports:
+      - "12201/udp:12201/udp"
+    volumes:
+     - ./conf:/config-dir
+

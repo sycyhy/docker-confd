@@ -1,0 +1,21 @@
+input {
+   beats {
+     type => beats
+     port => 5044
+   }
+}
+filter {
+  grok {
+	match => ["message", "%{TIMESTAMP_ISO8601:timestamp} \[%{USERNAME:thread}\] (\s)?(\[)?%{LOGLEVEL:loglevel}(\])?(\s)? %{WORD:className} - %{GREEDYDATA:logmsg}"]
+  }
+  date{
+    match=>["timestamp","YYYY-MM-dd HH:mm:ss,SSS"]
+    locale => "en"
+    timezone => "UTC"
+  }
+}
+output {
+  stdout {}
+  elasticsearch { hosts => ["localhost:9200"] }
+}
+
